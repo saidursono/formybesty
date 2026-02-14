@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta name="theme-color" content="#080808"/>
+  <title>Happy Valentine's Day Kutti 😊</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet"/>
+
+  <style>
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+
+    :root {
+      --black:  #080808;
+      --red:    #c0182a;
+      --gold:   #c9a84c;
+      --cream:  #f5e6d0;
+      --dim:    rgba(255,255,255,0.06);
+      --gold-t: rgba(201,168,76,.18);
+    }
+
+    html { height:100%; }
+
+    body {
+      min-height:100%; height:100%;
+      background: var(--black);
+      color: var(--cream);
+      font-family: 'Montserrat', sans-serif;
+      overflow: hidden;
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+    }
+
+    body::after {
+      content:'';
+      position:fixed; inset:0;
+      background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,.55) 100%);
+      pointer-events:none; z-index:5;
+    }
+
+    .glow {
+      position:fixed;
+      width: min(520px, 90vw); height: min(520px, 90vw);
+      border-radius:50%;
+      background: radial-gradient(circle, rgba(139,0,0,.22) 0%, transparent 68%);
+      top:50%; left:50%;
+      transform: translate(-50%,-50%) translateZ(0);
+      pointer-events:none; z-index:2;
+      will-change: opacity, transform;
+      animation: breathe 5s ease-in-out infinite;
+    }
+    @keyframes breathe {
+      0%,100% { opacity:.55; transform:translate(-50%,-50%) scale(1) translateZ(0); }
+      50%      { opacity:.9;  transform:translate(-50%,-50%) scale(1.12) translateZ(0); }
+    }
+
+    #pCanvas { position:fixed; inset:0; pointer-events:none; z-index:3; }
+
+    .curtain {
+      position:fixed; inset:0; background:var(--black); z-index:200;
+      will-change:transform;
+      animation: curtainUp 1.2s .2s cubic-bezier(.77,0,.18,1) forwards;
+    }
+    @keyframes curtainUp { to { transform:translateY(-100%) translateZ(0); } }
+
+    .scene {
+      position:relative; z-index:10;
+      min-height:100vh; display:flex; flex-direction:column;
+      align-items:center; justify-content:center;
+      padding:20px 16px;
+      overflow-y:auto;
+    }
+
+    .letter {
+      position:relative; max-width:520px; width:100%;
+      opacity:0; animation:fadeUp .9s 1.4s ease forwards;
+    }
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(18px) translateZ(0); }
+      to   { opacity:1; transform:translateY(0) translateZ(0); }
+    }
+
+    .corner {
+      position:absolute; color:var(--gold);
+      font-size:.95rem; opacity:.5; pointer-events:none;
+    }
+    .corner-tl { top:-18px; left:0; }
+    .corner-br { bottom:-18px; right:0; }
+
+    .tagline {
+      font-size:.6rem; letter-spacing:.38em; color:var(--gold);
+      text-transform:uppercase; text-align:center; margin-bottom:18px;
+      opacity:0; animation:slideDown .7s 1.7s ease forwards;
+    }
+    @keyframes slideDown {
+      from { opacity:0; transform:translateY(-10px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+
+    .sender {
+      text-align:center; margin-bottom:26px;
+      opacity:0; animation:slideDown .7s 1.9s ease forwards;
+    }
+    .sender .label { font-size:.55rem; letter-spacing:.3em; color:rgba(245,230,208,.35); text-transform:uppercase; margin-bottom:4px; }
+    .sender .name  { font-family:'Cormorant Garamond',serif; font-size:clamp(2.4rem,8vw,3.2rem); font-weight:300; font-style:italic; color:var(--cream); line-height:1; }
+
+    .ornament {
+      display:flex; align-items:center; gap:10px; margin-bottom:26px;
+      opacity:0; animation:fadeUp .7s 2.1s ease forwards;
+    }
+    .ornament::before,
+    .ornament::after { content:''; flex:1; height:1px; background:linear-gradient(to right,transparent,var(--gold)); }
+    .ornament::after  { background:linear-gradient(to left,transparent,var(--gold)); }
+    .ornament span { color:var(--red); font-size:1.2rem; }
+
+    .msg-box {
+      border:1px solid rgba(201,168,76,.18); border-radius:2px;
+      padding:clamp(18px,5vw,28px) clamp(20px,5vw,32px);
+      background:var(--dim);
+      margin-bottom:22px;
+      opacity:0; animation:fadeUp .7s 2.3s ease forwards;
+    }
+    @supports (backdrop-filter:blur(1px)) {
+      @media (min-width:600px) {
+        .msg-box { backdrop-filter:blur(4px); }
+      }
+    }
+
+    .to-line { font-size:.55rem; letter-spacing:.3em; color:rgba(245,230,208,.35); text-transform:uppercase; margin-bottom:6px; }
+    .to-you  { font-family:'Cormorant Garamond',serif; font-size:clamp(2rem,7vw,2.6rem); font-weight:600; color:var(--red); letter-spacing:.07em; margin-bottom:16px; }
+    .msg-text { 
+      font-family:'Cormorant Garamond',serif; 
+      font-size:clamp(1.05rem,4vw,1.2rem); 
+      font-weight:300;
+      font-style:italic;
+      line-height:2.1; 
+      color:rgba(245,230,208,.88); 
+    }
+
+    .seal {
+      text-align:center; margin-bottom:20px;
+      opacity:0; animation:fadeUp .7s 2.5s ease forwards;
+    }
+    .heart {
+      font-size:2.6rem; display:inline-block;
+      will-change:transform;
+      animation:heartbeat 1.5s ease-in-out infinite;
+      filter:drop-shadow(0 0 14px rgba(192,24,42,.75));
+    }
+    @keyframes heartbeat {
+      0%,100% { transform:scale(1) translateZ(0); }
+      15%     { transform:scale(1.2) translateZ(0); }
+      30%     { transform:scale(1) translateZ(0); }
+      44%     { transform:scale(1.12) translateZ(0); }
+    }
+
+    .question-wrap { opacity:0; animation:fadeUp .7s 2.8s ease forwards; }
+    .big-q {
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(1.5rem,5.5vw,1.9rem);
+      font-weight:300; font-style:italic; color:var(--cream);
+      text-align:center; margin-bottom:22px; letter-spacing:.02em; line-height:1.5;
+    }
+
+    .btns { display:flex; justify-content:center; }
+
+    .btn-yes {
+      background:var(--red); color:var(--cream); border:none;
+      padding:14px 44px;
+      font-family:'Montserrat',sans-serif; font-size:.72rem; font-weight:700;
+      letter-spacing:.22em; text-transform:uppercase; cursor:pointer; border-radius:1px;
+      box-shadow:0 0 28px rgba(192,24,42,.38);
+      -webkit-appearance:none;
+      will-change:transform;
+      transition:background .2s, box-shadow .2s, transform .12s;
+      touch-action:manipulation;
+    }
+    .btn-yes:active { background:#e01030; box-shadow:0 0 40px rgba(192,24,42,.65); transform:translateY(-2px) scale(1.02) translateZ(0); }
+
+    #noBtn {
+      position:fixed; right:28px; bottom:60px;
+      background:transparent; color:rgba(245,230,208,.5);
+      border:1px solid rgba(245,230,208,.22);
+      padding:12px 28px;
+      font-family:'Montserrat',sans-serif; font-size:.7rem; font-weight:400;
+      letter-spacing:.2em; text-transform:uppercase;
+      cursor:pointer; border-radius:1px; z-index:500;
+      white-space:nowrap; touch-action:manipulation;
+      will-change:transform;
+      transition:left .09s linear, top .09s linear;
+    }
+
+    .signature {
+      margin-top:24px; font-size:.55rem; letter-spacing:.25em;
+      color:rgba(245,230,208,.18); text-transform:uppercase;
+      text-align:center; opacity:0; animation:fadeUp 1s 3.4s ease forwards;
+    }
+
+    #yesScreen { display:none; text-align:center; opacity:0; animation:fadeUp .8s ease forwards; }
+
+    .yes-big {
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(3rem,12vw,4.5rem);
+      font-weight:600; color:var(--red); letter-spacing:.06em;
+      line-height:1; margin-bottom:10px;
+      will-change:text-shadow;
+      animation:pulse2 1.8s ease-in-out infinite;
+    }
+    @keyframes pulse2 {
+      0%,100% { text-shadow:0 0 18px rgba(192,24,42,.55); }
+      50%      { text-shadow:0 0 45px rgba(192,24,42,.95), 0 0 70px rgba(192,24,42,.35); }
+    }
+
+    .yes-sub {
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(1.05rem,4.2vw,1.25rem);
+      font-weight:300; font-style:italic; color:rgba(245,230,208,.75);
+      line-height:1.95; max-width:440px; margin:0 auto 28px;
+    }
+
+    .ring-wrap { display:flex; justify-content:center; margin-bottom:20px; }
+    .ring {
+      position:relative; width:80px; height:80px; border-radius:50%;
+      background:linear-gradient(145deg, #c0182a, #8a1020);
+      box-shadow:0 5px 25px rgba(192,24,42,.4), inset 0 -2px 8px rgba(0,0,0,.3);
+      display:flex; align-items:center; justify-content:center;
+      animation:ringPulse 1.8s ease-in-out infinite;
+    }
+    .ring::before {
+      content:''; position:absolute; top:-8px; left:50%; width:10px; height:18px;
+      background:linear-gradient(145deg, #e0e0e0, #aaa);
+      transform:translateX(-50%); border-radius:2px; box-shadow:0 2px 6px rgba(0,0,0,.2);
+    }
+    .ring-inner { font-size:1.8rem; color:#fff; text-shadow:0 2px 6px rgba(0,0,0,.4); }
+    @keyframes ringPulse {
+      0%,100% { transform:scale(1) translateZ(0); box-shadow:0 5px 25px rgba(192,24,42,.4), inset 0 -2px 8px rgba(0,0,0,.3); }
+      50%      { transform:scale(1.08) translateZ(0); box-shadow:0 8px 35px rgba(192,24,42,.7), inset 0 -2px 8px rgba(0,0,0,.3); }
+    }
+
+    .send-status {
+      margin-top:22px; font-size:.7rem; letter-spacing:.15em; color:var(--gold);
+      text-transform:uppercase; opacity:0;
+    }
+    .send-status.show { animation:fadeUp .6s ease forwards; }
+
+    #toast {
+      position:fixed; top:30px; left:50%; transform:translateX(-50%) translateY(-100px);
+      background:rgba(201,168,76,.92); color:var(--black); padding:14px 28px;
+      border-radius:2px; font-size:.7rem; letter-spacing:.1em; font-weight:700;
+      text-transform:uppercase; z-index:9999; box-shadow:0 4px 20px rgba(0,0,0,.3);
+      transition:transform .4s cubic-bezier(.68,-.55,.27,1.55);
+    }
+    #toast.show { transform:translateX(-50%) translateY(0); }
+
+    #roseRain { position:fixed; inset:0; pointer-events:none; z-index:150; overflow:hidden; }
+    .rose-drop {
+      position:absolute; top:-50px; font-size:1.2rem; opacity:.85;
+      animation:fallRose 4s linear forwards;
+      will-change:transform;
+    }
+    @keyframes fallRose {
+      to { transform:translateY(110vh) rotate(360deg) translateZ(0); opacity:0; }
+    }
+  </style>
+</head>
+<body>
+<div id="toast"></div>
+<div id="roseRain"></div>
+
+<div class="glow"></div>
+<canvas id="pCanvas"></canvas>
+<div class="curtain"></div>
+
+<div class="scene">
+  <div class="letter" id="mainBlock">
+    <div class="corner corner-tl">❖</div>
+    <div class="corner corner-br">❖</div>
+
+    <div class="tagline">Love Letter</div>
+
+    <div class="sender">
+      <div class="label">From</div>
+      <div class="name" id="fromName">Saidur</div>
+    </div>
+
+    <div class="ornament"><span>♥</span></div>
+
+    <div class="msg-box">
+      <div class="to-line">To My</div>
+      <div class="to-you" id="toName">Kutti</div>
+      <div class="msg-text">
+        Do you know how much I love you?<br/>
+        Every moment, every breath, I think only of you.<br/>
+        Your smile, your anger, everything about you is precious to me.<br/><br/>
+        
+        Without you, my life is incomplete. You are my dream, my love, my everything. 💖
+      </div>
+    </div>
+
+    <div class="seal">
+      <div class="heart">❤️</div>
+    </div>
+
+    <div class="question-wrap">
+      <div class="big-q">
+        Will you Kutti ?<br/>
+        As  I'M  kutta so You Are kutti ?<br/>
+        Are You Happy in Valentine's Day 😊? <br>
+ 		Kutti Tui Ki Kutta Bolbu...?  😊
+
+      </div>
+      <div class="btns">
+        <button class="btn-yes" id="yesBtn">Yes, Kutta 😊</button>
+      </div>
+    </div>
+
+    <button id="noBtn">No</button>
+  </div>
+
+  <div id="yesScreen">
+    <div class="ring-wrap"><div class="ring"><span class="ring-inner">♥</span></div></div>
+    <div class="yes-big" style="margin-top:18px"> Happy Velentine Day kutta  </div>
+    <div class="yes-sub">
+      <strong id="fromNameYes">Saidur</strong> is smiling right now —<br/>
+      Only for you, this day is just for <strong>you.</strong><br/><br/>
+      Happy Valentine's Day! Kutta 😊<br/>
+      I love you. So much. Kutti💖
+    </div>
+    <div class="send-status" id="sendStatus">💌 Sending love notification...</div>
+  </div>
+
+  <div class="signature">14th February · Made with love for Sinthia 😊</div>
+</div>
+
+<script>
+const p    = new URLSearchParams(window.location.search);
+const from = p.get('from') || 'Saidur';
+const to   = p.get('to')   || 'Sinthia';
+
+document.getElementById('fromName').textContent    = from;
+document.getElementById('toName').textContent      = to;
+document.getElementById('fromNameYes').textContent = from;
+
+(function initParticles() {
+  const canvas = document.getElementById('pCanvas');
+  const ctx    = canvas.getContext('2d');
+
+  const isLowEnd = navigator.hardwareConcurrency <= 4 || window.innerWidth < 400;
+  const MAX      = isLowEnd ? 22 : 38;
+
+  const W = () => canvas.width  = window.innerWidth;
+  const H = () => canvas.height = window.innerHeight;
+  W(); H();
+  window.addEventListener('resize', () => { W(); H(); }, { passive:true });
+
+  const particles = [];
+  const COLORS = ['rgba(139,0,0,', 'rgba(201,168,76,'];
+
+  function mkP() {
+    const col = COLORS[Math.random() > .5 ? 0 : 1];
+    return {
+      x:   Math.random() * canvas.width,
+      y:   canvas.height + 10,
+      r:   1 + Math.random() * 2.5,
+      vx:  (Math.random() - .5) * .4,
+      vy:  -(1.2 + Math.random() * 2),
+      a:   0,
+      col: col,
+      maxA: .55 + Math.random() * .35,
+      shrink: .992 + Math.random() * .005
+    };
+  }
+
+  for (let i = 0; i < MAX; i++) {
+    const pt = mkP();
+    pt.y = Math.random() * canvas.height;
+    particles.push(pt);
+  }
+
+  let frame = 0;
+  function tick() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    for (let i = 0; i < particles.length; i++) {
+      const pt = particles[i];
+      pt.y += pt.vy;
+      pt.x += pt.vx;
+      pt.r *= pt.shrink;
+
+      if (pt.y > canvas.height * .85)     pt.a = Math.min(pt.a + .04, pt.maxA);
+      else if (pt.y < canvas.height * .15) pt.a = Math.max(pt.a - .03, 0);
+
+      if (pt.r < .25 || pt.y < -20) {
+        particles[i] = mkP();
+        continue;
+      }
+
+      ctx.beginPath();
+      ctx.arc(pt.x, pt.y, pt.r, 0, Math.PI * 2);
+      ctx.fillStyle = pt.col + pt.a + ')';
+      ctx.fill();
+    }
+
+    frame++;
+    if (frame % 22 === 0 && particles.length < MAX) particles.push(mkP());
+
+    requestAnimationFrame(tick);
+  }
+  tick();
+})();
+
+const noBtn = document.getElementById('noBtn');
+let   lastRunTime = 0;
+
+function runAway() {
+  const now = Date.now();
+  if (now - lastRunTime < 80) return;
+  lastRunTime = now;
+
+  const bw   = noBtn.offsetWidth  + 24;
+  const bh   = noBtn.offsetHeight + 24;
+  const maxX = Math.max(0, window.innerWidth  - bw);
+  const maxY = Math.max(0, window.innerHeight - bh);
+  noBtn.style.right  = 'auto';
+  noBtn.style.bottom = 'auto';
+  noBtn.style.left   = (10 + Math.random() * maxX | 0) + 'px';
+  noBtn.style.top    = (10 + Math.random() * maxY | 0) + 'px';
+}
+
+noBtn.addEventListener('mouseover',  runAway, { passive:true });
+noBtn.addEventListener('touchstart', e => { e.preventDefault(); runAway(); }, { passive:false });
+noBtn.addEventListener('click',      runAway);
+
+function showToast(msg, dur = 4000) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), dur);
+}
+
+async function sendEmail() {
+  const status = document.getElementById('sendStatus');
+  status.classList.add('show');
+  status.textContent = '💌 Sending email...';
+
+  const fd = new FormData();
+  fd.append('access_key', '77e30847-f704-4459-b883-295bfe022e7b');
+  fd.append('subject', `🌹 ${to} SAID YES! Happy Valentine's Day Kutta! 💖`);
+  fd.append('from_name', 'Valentine Website');
+  fd.append('from', 'noreply@valentine.com');
+  fd.append('to', 'issaidur999@gmail.com');
+  fd.append('message',
+    `🌹 YOUR KUTTI SAID YES! 💖\n\n` +
+    `${to} accepted your proposal!\n\n` +
+    `She said she will stay with you forever! 💑\n\n` +
+    `From: ${from}\n` +
+    `To: ${to}\n\n` +
+    `Time: ${new Date().toLocaleString()}\n\n` +
+    `Happy Valentine's Day Kutti! 🥀❤️\n` +
+    `I Love You Kutti! 💖\n\n` +
+    `— Sent automatically from your Valentine website`
+  );
+
+  try {
+    const res = await fetch('https://api.web3forms.com/submit', { 
+      method: 'POST', 
+      body: fd,
+      headers: {
+        'Accept': 'application/json'
+      }
+    });
+    
+    const data = await res.json();
+    
+    if (data.success) {
+      status.textContent = '✅ Email sent successfully to ' + from + '!';
+      showToast('💌 Notification sent to your kutta!');
+      console.log('Email sent successfully!', data);
+    } else {
+      status.textContent = '❌ Email failed: ' + (data.message || 'Unknown error');
+      showToast('⚠️ Email failed to send');
+      console.error('Email error:', data);
+    }
+  } catch (error) {
+    status.textContent = '❌ Network error - please check connection';
+    showToast('⚠️ Could not send email');
+    console.error('Fetch error:', error);
+  }
+}
+
+function startRoseRain() {
+  const rain   = document.getElementById('roseRain');
+  const petals = ['🌹','♥','💋','🥀','✨','💖','🌸'];
+  const isLow  = navigator.hardwareConcurrency <= 4;
+  const BURST  = isLow ? 28 : 48;
+  const CONT   = isLow ? 45 : 70;
+
+  function drop(delay) {
+    setTimeout(() => {
+      const r           = document.createElement('div');
+      r.className       = 'rose-drop';
+      r.textContent     = petals[Math.random() * petals.length | 0];
+      r.style.left      = (Math.random() * 100) + 'vw';
+      r.style.fontSize  = (.9 + Math.random() * 1.4) + 'rem';
+      r.style.animationDuration = (2 + Math.random() * 3) + 's';
+      rain.appendChild(r);
+      setTimeout(() => r.remove(), 5800);
+    }, delay);
+  }
+
+  for (let i = 0; i < BURST; i++) drop(i * 55);
+
+  let count = 0;
+  const iv = setInterval(() => {
+    drop(0);
+    if (++count >= CONT) clearInterval(iv);
+  }, 200);
+}
+
+document.getElementById('yesBtn').addEventListener('click', function sayYes() {
+  noBtn.style.display = 'none';
+  document.getElementById('mainBlock').style.display = 'none';
+  document.querySelector('.seal').style.display = 'none';
+
+  const ys = document.getElementById('yesScreen');
+  ys.style.display = 'block';
+
+  startRoseRain();
+  
+  // Send email after 1 second delay
+  setTimeout(() => {
+    console.log('Attempting to send email...');
+    sendEmail();
+  }, 1000);
+}, { once:true });
+</script>
+</body>
+</html>
