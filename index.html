@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
   <meta name="theme-color" content="#080808"/>
-  <title> No Word 🙁</title>
+  <title>Happy Valentine's Day Kutti 😊</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&family=Montserrat:wght@300;400;700&family=Hind+Siliguri:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet"/>
 
   <style>
     *, *::before, *::after { 
@@ -36,7 +36,7 @@
       height:100%;
       background: var(--black);
       color: var(--cream);
-      font-family: 'Hind Siliguri', 'Montserrat', sans-serif;
+      font-family: 'Montserrat', sans-serif;
       overflow: hidden;
       -webkit-transform: translateZ(0);
       transform: translateZ(0);
@@ -114,9 +114,9 @@
       overflow-x:hidden;
     }
 
-    .message-container {
+    .letter {
       position:relative; 
-      max-width:560px; 
+      max-width:520px; 
       width:100%;
       opacity:0; 
       animation:fadeUp .9s 1.4s ease forwards;
@@ -151,9 +151,13 @@
       right:0; 
     }
 
-    .header {
+    .tagline {
+      font-size:.6rem; 
+      letter-spacing:.38em; 
+      color:var(--gold);
+      text-transform:uppercase; 
       text-align:center; 
-      margin-bottom:28px;
+      margin-bottom:18px;
       opacity:0; 
       animation:slideDown .7s 1.7s ease forwards;
     }
@@ -169,14 +173,28 @@
       }
     }
 
-    .title {
-      font-family:'Cormorant Garamond',serif;
-      font-size:clamp(2.2rem,7vw,2.8rem);
-      font-weight:600; 
-      color:var(--red); 
-      letter-spacing:.05em;
-      line-height:1.2;
-      margin-bottom:12px;
+    .sender {
+      text-align:center; 
+      margin-bottom:26px;
+      opacity:0; 
+      animation:slideDown .7s 1.9s ease forwards;
+    }
+    
+    .sender .label { 
+      font-size:.55rem; 
+      letter-spacing:.3em; 
+      color:rgba(245,230,208,.35); 
+      text-transform:uppercase; 
+      margin-bottom:4px; 
+    }
+    
+    .sender .name { 
+      font-family:'Cormorant Garamond',serif; 
+      font-size:clamp(2.4rem,8vw,3.2rem); 
+      font-weight:300; 
+      font-style:italic; 
+      color:var(--cream); 
+      line-height:1; 
     }
 
     .ornament {
@@ -185,7 +203,7 @@
       gap:10px; 
       margin-bottom:26px;
       opacity:0; 
-      animation:fadeUp .7s 1.9s ease forwards;
+      animation:fadeUp .7s 2.1s ease forwards;
     }
     
     .ornament::before,
@@ -205,202 +223,307 @@
       font-size:1.2rem; 
     }
 
-    .message-box {
+    .msg-box {
       border:1px solid rgba(201,168,76,.18); 
       border-radius:2px;
-      padding:clamp(20px,5vw,30px) clamp(22px,5vw,34px);
+      padding:clamp(18px,5vw,28px) clamp(20px,5vw,32px);
       background:var(--dim);
       margin-bottom:22px;
       opacity:0; 
-      animation:fadeUp .7s 2.1s ease forwards;
+      animation:fadeUp .7s 2.3s ease forwards;
     }
     
     @supports (backdrop-filter:blur(1px)) {
       @media (min-width:600px) {
-        .message-box { 
+        .msg-box { 
           backdrop-filter:blur(4px); 
         }
       }
     }
 
-    .message-text {
-      font-family:'Hind Siliguri', sans-serif;
-      font-size:clamp(1.1rem,4vw,1.35rem);
-      font-weight:400;
-      line-height:2;
-      color:rgba(245,230,208,.9);
-      text-align:center;
-      margin-bottom:8px;
+    .to-line { 
+      font-size:.55rem; 
+      letter-spacing:.3em; 
+      color:rgba(245,230,208,.35); 
+      text-transform:uppercase; 
+      margin-bottom:6px; 
+    }
+    
+    .to-you { 
+      font-family:'Cormorant Garamond',serif; 
+      font-size:clamp(2rem,7vw,2.6rem); 
+      font-weight:600; 
+      color:var(--red); 
+      letter-spacing:.07em; 
+      margin-bottom:16px; 
+    }
+    
+    .msg-text { 
+      font-family:'Cormorant Garamond',serif; 
+      font-size:clamp(1.05rem,4vw,1.2rem); 
+      font-weight:300;
+      font-style:italic;
+      line-height:2.1; 
+      color:rgba(245,230,208,.88); 
     }
 
-    .form-container {
-      opacity:0; 
-      animation:fadeUp .7s 2.3s ease forwards;
-    }
-
-    .input-label {
-      font-size:.65rem;
-      letter-spacing:.25em;
-      color:var(--gold);
-      text-transform:uppercase;
-      margin-bottom:10px;
-      display:block;
-      text-align:center;
-    }
-
-    .message-input {
-      width:100%;
-      min-height:140px;
-      background:rgba(255,255,255,.03);
-      border:1px solid rgba(201,168,76,.25);
-      border-radius:2px;
-      padding:16px 18px;
-      color:var(--cream);
-      font-family:'Hind Siliguri', 'Montserrat', sans-serif;
-      font-size:clamp(.95rem,3.5vw,1.05rem);
-      line-height:1.7;
-      resize:vertical;
-      transition:border-color .3s, background .3s;
-      -webkit-appearance:none;
-    }
-
-    .message-input::placeholder {
-      color:rgba(245,230,208,.3);
-    }
-
-    .message-input:focus {
-      outline:none;
-      border-color:rgba(201,168,76,.5);
-      background:rgba(255,255,255,.05);
-      box-shadow:0 0 20px rgba(201,168,76,.12);
-    }
-
-    .char-count {
-      text-align:right;
-      font-size:.6rem;
-      color:rgba(245,230,208,.35);
-      margin-top:6px;
-      letter-spacing:.15em;
-    }
-
-    .btn-container {
-      margin-top:20px;
-      text-align:center;
+    .seal {
+      text-align:center; 
+      margin-bottom:20px;
       opacity:0; 
       animation:fadeUp .7s 2.5s ease forwards;
     }
+    
+    .heart {
+      font-size:2.6rem; 
+      display:inline-block;
+      will-change:transform;
+      animation:heartbeat 1.5s ease-in-out infinite;
+      filter:drop-shadow(0 0 14px rgba(192,24,42,.75));
+    }
+    
+    @keyframes heartbeat {
+      0%,100% { 
+        transform:scale(1) translateZ(0); 
+      }
+      15% { 
+        transform:scale(1.2) translateZ(0); 
+      }
+      30% { 
+        transform:scale(1) translateZ(0); 
+      }
+      44% { 
+        transform:scale(1.12) translateZ(0); 
+      }
+    }
 
-    .btn-send {
+    .question-wrap { 
+      opacity:0; 
+      animation:fadeUp .7s 2.8s ease forwards; 
+    }
+    
+    .big-q {
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(1.5rem,5.5vw,1.9rem);
+      font-weight:300; 
+      font-style:italic; 
+      color:var(--cream);
+      text-align:center; 
+      margin-bottom:22px; 
+      letter-spacing:.02em; 
+      line-height:1.5;
+    }
+
+    .btns { 
+      display:flex; 
+      justify-content:center; 
+    }
+
+    .btn-yes {
       background:var(--red); 
       color:var(--cream); 
       border:none;
-      padding:15px 50px;
+      padding:14px 44px;
       font-family:'Montserrat',sans-serif; 
-      font-size:.75rem; 
+      font-size:.72rem; 
       font-weight:700;
       letter-spacing:.22em; 
       text-transform:uppercase; 
       cursor:pointer; 
-      border-radius:2px;
+      border-radius:1px;
       box-shadow:0 0 28px rgba(192,24,42,.38);
       -webkit-appearance:none;
       will-change:transform;
       transition:background .2s, box-shadow .2s, transform .12s;
       touch-action:manipulation;
-      position:relative;
-      overflow:hidden;
     }
     
-    .btn-send:hover:not(:disabled) {
+    .btn-yes:hover {
       background:#d01838;
       box-shadow:0 0 35px rgba(192,24,42,.55);
     }
     
-    .btn-send:active:not(:disabled) { 
+    .btn-yes:active { 
       background:#e01030; 
       box-shadow:0 0 40px rgba(192,24,42,.65); 
       transform:translateY(-2px) scale(1.02) translateZ(0); 
     }
 
-    .btn-send:disabled {
-      opacity:.6;
-      cursor:not-allowed;
+    #noBtn {
+      position:fixed; 
+      right:28px; 
+      bottom:60px;
+      background:transparent; 
+      color:rgba(245,230,208,.5);
+      border:1px solid rgba(245,230,208,.22);
+      padding:12px 28px;
+      font-family:'Montserrat',sans-serif; 
+      font-size:.7rem; 
+      font-weight:400;
+      letter-spacing:.2em; 
+      text-transform:uppercase;
+      cursor:pointer; 
+      border-radius:1px; 
+      z-index:500;
+      white-space:nowrap; 
+      touch-action:manipulation;
+      will-change:transform;
+      transition:left .09s linear, top .09s linear;
     }
-
-    .btn-send .spinner {
-      display:none;
-      width:16px;
-      height:16px;
-      border:2px solid rgba(245,230,208,.3);
-      border-top-color:var(--cream);
-      border-radius:50%;
-      animation:spin .8s linear infinite;
-      margin:0 auto;
-    }
-
-    .btn-send.loading .spinner {
-      display:inline-block;
-    }
-
-    .btn-send.loading .btn-text {
-      display:none;
-    }
-
-    @keyframes spin {
-      to { transform:rotate(360deg); }
+    
+    #noBtn:hover {
+      color:rgba(245,230,208,.7);
+      border-color:rgba(245,230,208,.35);
     }
 
     .signature {
-      margin-top:28px; 
+      margin-top:24px; 
       font-size:.55rem; 
       letter-spacing:.25em;
       color:rgba(245,230,208,.18); 
       text-transform:uppercase;
       text-align:center; 
       opacity:0; 
-      animation:fadeUp 1s 2.7s ease forwards;
+      animation:fadeUp 1s 3.4s ease forwards;
     }
 
-    #successScreen {
-      display:none;
-      text-align:center;
-      opacity:0;
-      animation:fadeUp .8s ease forwards;
-      max-width:480px;
-      width:100%;
+    #yesScreen { 
+      display:none; 
+      text-align:center; 
+      opacity:0; 
+      animation:fadeUp .8s ease forwards; 
     }
 
-    .success-icon {
-      font-size:4rem;
-      margin-bottom:20px;
-      display:inline-block;
-      animation:scaleIn .6s cubic-bezier(.68,-0.55,.265,1.55) forwards;
-    }
-
-    @keyframes scaleIn {
-      0% {
-        transform:scale(0) rotate(-180deg);
-      }
-      100% {
-        transform:scale(1) rotate(0deg);
-      }
-    }
-
-    .success-title {
+    .yes-big {
       font-family:'Cormorant Garamond',serif;
-      font-size:clamp(2.2rem,8vw,3rem);
-      font-weight:600;
-      color:var(--red);
-      margin-bottom:16px;
-      line-height:1.2;
+      font-size:clamp(3rem,12vw,4.5rem);
+      font-weight:600; 
+      color:var(--red); 
+      letter-spacing:.06em;
+      line-height:1; 
+      margin-bottom:10px;
+      will-change:text-shadow;
+      animation:pulse2 1.8s ease-in-out infinite;
+    }
+    
+    @keyframes pulse2 {
+      0%,100% { 
+        text-shadow:0 0 18px rgba(192,24,42,.55); 
+      }
+      50% { 
+        text-shadow:0 0 45px rgba(192,24,42,.95), 0 0 70px rgba(192,24,42,.35); 
+      }
     }
 
-    .success-message {
-      font-family:'Hind Siliguri', sans-serif;
-      font-size:clamp(1rem,4vw,1.15rem);
+    .yes-sub {
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(1.05rem,4.2vw,1.25rem);
+      font-weight:300; 
+      font-style:italic; 
       color:rgba(245,230,208,.75);
-      line-height:1.9;
-      font-weight:300;
+      line-height:1.95; 
+      max-width:440px; 
+      margin:0 auto 28px;
+    }
+
+    .ring-wrap { 
+      display:flex; 
+      justify-content:center; 
+      margin-bottom:20px; 
+    }
+    
+    .ring {
+      position:relative; 
+      width:80px; 
+      height:80px; 
+      border-radius:50%;
+      background:linear-gradient(145deg, #c0182a, #8a1020);
+      box-shadow:0 5px 25px rgba(192,24,42,.4), inset 0 -2px 8px rgba(0,0,0,.3);
+      display:flex; 
+      align-items:center; 
+      justify-content:center;
+      animation:ringPulse 1.8s ease-in-out infinite;
+    }
+    
+    .ring::before {
+      content:''; 
+      position:absolute; 
+      top:-8px; 
+      left:50%; 
+      width:10px; 
+      height:18px;
+      background:linear-gradient(145deg, #c0182a, #8a1020);
+      border-radius:2px;
+      transform:translateX(-50%);
+      box-shadow:0 2px 8px rgba(192,24,42,.35);
+    }
+    
+    .ring-inner {
+      font-size:1.8rem;
+      color:var(--cream);
+      animation:heartbeatRing 1.5s ease-in-out infinite;
+    }
+    
+    @keyframes ringPulse {
+      0%,100% { 
+        transform:scale(1) translateZ(0); 
+        box-shadow:0 5px 25px rgba(192,24,42,.4), inset 0 -2px 8px rgba(0,0,0,.3); 
+      }
+      50% { 
+        transform:scale(1.08) translateZ(0); 
+        box-shadow:0 8px 38px rgba(192,24,42,.65), inset 0 -2px 8px rgba(0,0,0,.3); 
+      }
+    }
+    
+    @keyframes heartbeatRing {
+      0%,100% { 
+        transform:scale(1); 
+      }
+      15% { 
+        transform:scale(1.15); 
+      }
+      30% { 
+        transform:scale(1); 
+      }
+      44% { 
+        transform:scale(1.08); 
+      }
+    }
+
+    .send-status {
+      margin-top:22px;
+      font-size:.65rem;
+      letter-spacing:.18em;
+      color:var(--gold);
+      text-transform:uppercase;
+      opacity:0;
+      transition:opacity .3s;
+    }
+    
+    .send-status.show {
+      opacity:1;
+    }
+
+    #roseRain {
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:100;
+      overflow:hidden;
+    }
+    
+    .rose-drop {
+      position:absolute;
+      top:-50px;
+      animation:roseFall 4s linear forwards;
+      will-change:transform;
+    }
+    
+    @keyframes roseFall {
+      to {
+        transform:translateY(calc(100vh + 50px)) rotate(360deg) translateZ(0);
+        opacity:0;
+      }
     }
 
     #toast {
@@ -410,7 +533,7 @@
       transform:translateX(-50%) translateY(-100px);
       background:rgba(201,168,76,.95);
       color:var(--black);
-      padding:14px 28px;
+      padding:12px 24px;
       border-radius:4px;
       font-size:.7rem;
       letter-spacing:.15em;
@@ -420,19 +543,11 @@
       opacity:0;
       transition:transform .4s cubic-bezier(.77,0,.18,1), opacity .4s;
       box-shadow:0 4px 20px rgba(201,168,76,.35);
-      max-width:90%;
-      text-align:center;
     }
     
     #toast.show {
       transform:translateX(-50%) translateY(0);
       opacity:1;
-    }
-
-    #toast.error {
-      background:rgba(192,24,42,.95);
-      color:var(--cream);
-      box-shadow:0 4px 20px rgba(192,24,42,.35);
     }
 
     /* Mobile optimizations */
@@ -441,18 +556,16 @@
         padding:15px 12px;
       }
       
-      .message-box {
-        padding:18px 20px;
-      }
-
-      .message-input {
-        min-height:120px;
-        font-size:.95rem;
+      .btn-yes {
+        padding:12px 36px;
+        font-size:.68rem;
       }
       
-      .btn-send {
-        padding:13px 40px;
-        font-size:.7rem;
+      #noBtn {
+        right:16px;
+        bottom:40px;
+        padding:10px 22px;
+        font-size:.65rem;
       }
       
       .corner {
@@ -470,14 +583,16 @@
 
     /* Very small screens */
     @media (max-width: 380px) {
-      .message-text {
-        font-size:1rem;
-        line-height:1.8;
+      .tagline {
+        font-size:.55rem;
       }
-
-      .message-input {
-        padding:14px 16px;
-        min-height:110px;
+      
+      .msg-box {
+        padding:16px 18px;
+      }
+      
+      .heart {
+        font-size:2.2rem;
       }
     }
 
@@ -487,11 +602,11 @@
         padding:10px;
       }
       
-      .message-container {
+      .letter {
         max-width:90%;
       }
       
-      .header {
+      .sender {
         margin-bottom:16px;
       }
       
@@ -499,13 +614,23 @@
         margin-bottom:16px;
       }
       
-      .message-box {
+      .msg-box {
         margin-bottom:16px;
-        padding:16px 20px;
       }
+      
+      .seal {
+        margin-bottom:12px;
+      }
+      
+      .heart {
+        font-size:2rem;
+      }
+    }
 
-      .message-input {
-        min-height:100px;
+    /* High DPI screens */
+    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+      body {
+        -webkit-font-smoothing: subpixel-antialiased;
       }
     }
 
@@ -525,63 +650,80 @@
 <div class="curtain"></div>
 <div class="glow"></div>
 <canvas id="pCanvas"></canvas>
+<div id="roseRain"></div>
 <div id="toast"></div>
 
 <div class="scene">
-  <div class="message-container" id="mainForm">
+  <div class="letter" id="mainBlock">
     <div class="corner corner-tl">✧</div>
     <div class="corner corner-br">✧</div>
 
-    <div class="header">
-      <div class="title">এই কুত্তা মিথ্যা বললি কেন?  আমি ট্যাব এ দেখে দেখেছিলাম তাই এমন হয়ছে!  <br> আমি ফোনের জন্যই  বানিয়েছি </div>
+    <div class="tagline">A special message</div>
+
+    <div class="sender">
+      <div class="label">From</div>
+      <div class="name" id="fromName">Saidur</div>
     </div>
 
     <div class="ornament"><span>♥</span></div>
 
-    <div class="message-box">
-      <div class="message-text">
-        প্রথম যখন বানাতে শুরু করি অনেক আনন্দ আর মুচকি মুচকি হাসছিলাম,<br/>
-        তোকে দেবো ভাবলাম কিন্তু তুই দেখলি but response করলি না,  রেগে আসিস 🥹, কেনো বল?  
+    <div class="msg-box">
+      <div class="to-line">To</div>
+      <div class="to-you" id="toName">Sinthia</div>
+      <div class="msg-text">
+        As I'M kutta so You Are kutti?<br/>
+        Are You Happy in Valentine's Day 😊?<br/>
+        Kutti Tui Ki Kutta Bolbu...? 😊
       </div>
     </div>
 
-    <form id="messageForm" class="form-container">
-      <label class="input-label">তোমার উত্তর লেখো</label>
-      <textarea 
-        id="messageInput" 
-        name="message"
-        class="message-input" 
-        placeholder="এখানে তোমার কথা লেখো..."
-        maxlength="1000"
-        required
-      ></textarea>
-      <div class="char-count">
-        <span id="charCount">0</span> / 1000
-      </div>
-
-      <div class="btn-container">
-        <button type="submit" class="btn-send" id="sendBtn">
-          <span class="btn-text">পাঠিয়ে দাও 💌</span>
-          <div class="spinner"></div>
-        </button>
-      </div>
-    </form>
-
-    <div class="signature">Made with love · ২০২৫</div>
-  </div>
-
-  <div id="successScreen">
-    <div class="success-icon">✓</div>
-    <div class="success-title">পাঠানো হয়েছে! 💖</div>
-    <div class="success-message">
-      তোমার মেসেজ সফলভাবে পাঠানো হয়েছে।<br/>
-      শীঘ্রই তোমার কাছে ফিরে আসবো! 😊
+    <div class="seal">
+      <div class="heart">♥</div>
     </div>
+
+    <div class="question-wrap">
+      <div class="big-q">
+        Will you be my Valentine?<br/>
+        Say "Yes" if you love me! 💖
+      </div>
+      <div class="btns">
+        <button class="btn-yes" id="yesBtn">Yes, Kutta 😊</button>
+      </div>
+    </div>
+
+    <button id="noBtn">No</button>
   </div>
+
+  <div id="yesScreen">
+    <div class="ring-wrap">
+      <div class="ring">
+        <span class="ring-inner">♥</span>
+      </div>
+    </div>
+    <div class="yes-big" style="margin-top:18px">Happy Valentine's Day Kutta</div>
+    <div class="yes-sub">
+      <strong id="fromNameYes">Saidur</strong> is smiling right now —<br/>
+      Only for you, this day is just for <strong>you.</strong><br/><br/>
+      Happy Valentine's Day! Kutta 😊<br/>
+      I love you. So much. Kutti💖
+    </div>
+    <div class="send-status" id="sendStatus">💌 Sending love notification...</div>
+  </div>
+
+  <div class="signature">14th February · Made with love for Sinthia 😊</div>
 </div>
 
 <script>
-// Particles Animation (Same as before)
+// URL Parameters
+const p    = new URLSearchParams(window.location.search);
+const from = p.get('from') || 'Saidur';
+const to   = p.get('to')   || 'Sinthia';
+
+document.getElementById('fromName').textContent    = from;
+document.getElementById('toName').textContent      = to;
+document.getElementById('fromNameYes').textContent = from;
+
+// Particles Animation
 (function initParticles() {
   const canvas = document.getElementById('pCanvas');
   const ctx    = canvas.getContext('2d');
@@ -658,68 +800,63 @@
   tick();
 })();
 
-// Character Counter
-const messageInput = document.getElementById('messageInput');
-const charCount = document.getElementById('charCount');
+// No Button Run Away Logic
+const noBtn = document.getElementById('noBtn');
+let   lastRunTime = 0;
 
-messageInput.addEventListener('input', function() {
-  const count = this.value.length;
-  charCount.textContent = count;
+function runAway() {
+  const now = Date.now();
+  if (now - lastRunTime < 80) return;
+  lastRunTime = now;
+
+  const bw   = noBtn.offsetWidth  + 24;
+  const bh   = noBtn.offsetHeight + 24;
+  const maxX = Math.max(0, window.innerWidth  - bw);
+  const maxY = Math.max(0, window.innerHeight - bh);
   
-  if (count > 900) {
-    charCount.style.color = 'var(--red)';
-  } else {
-    charCount.style.color = 'rgba(245,230,208,.35)';
-  }
-});
-
-// Toast Notification
-function showToast(msg, isError = false, duration = 4000) {
-  const toast = document.getElementById('toast');
-  toast.textContent = msg;
-  toast.classList.toggle('error', isError);
-  toast.classList.add('show');
-  setTimeout(() => toast.classList.remove('show'), duration);
+  noBtn.style.right  = 'auto';
+  noBtn.style.bottom = 'auto';
+  noBtn.style.left   = (10 + Math.random() * maxX | 0) + 'px';
+  noBtn.style.top    = (10 + Math.random() * maxY | 0) + 'px';
 }
 
-// Form Submission
-document.getElementById('messageForm').addEventListener('submit', async function(e) {
-  e.preventDefault();
-  
-  const messageInput = document.getElementById('messageInput');
-  const message = messageInput.value.trim();
-  
-  if (!message) {
-    showToast('অনুগ্রহ করে একটি মেসেজ লিখুন!', true);
-    return;
-  }
+noBtn.addEventListener('mouseover',  runAway, { passive:true });
+noBtn.addEventListener('touchstart', e => { 
+  e.preventDefault(); 
+  runAway(); 
+}, { passive:false });
+noBtn.addEventListener('click', runAway);
 
-  if (message.length < 5) {
-    showToast('মেসেজটি কমপক্ষে ৫ অক্ষরের হতে হবে!', true);
-    return;
-  }
+// Toast Notification
+function showToast(msg, dur = 4000) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), dur);
+}
 
-  const sendBtn = document.getElementById('sendBtn');
-  sendBtn.disabled = true;
-  sendBtn.classList.add('loading');
+// Send Email Function
+async function sendEmail() {
+  const status = document.getElementById('sendStatus');
+  status.classList.add('show');
+  status.textContent = '💌 Sending email...';
 
   const fd = new FormData();
   fd.append('access_key', '77e30847-f704-4459-b883-295bfe022e7b');
-  fd.append('subject', '💌 তোমার কাছে নতুন মেসেজ এসেছে!');
-  fd.append('from_name', 'Valentine Message Website');
+  fd.append('subject', `🌹 ${to} SAID YES! Happy Valentine's Day Kutta! 💖`);
+  fd.append('from_name', 'Valentine Website');
   fd.append('from', 'noreply@valentine.com');
   fd.append('to', 'issaidur999@gmail.com');
   fd.append('message',
-    `💌 নতুন মেসেজ পেয়েছো!\n\n` +
-    `━━━━━━━━━━━━━━━━━━━━━━\n\n` +
-    `${message}\n\n` +
-    `━━━━━━━━━━━━━━━━━━━━━━\n\n` +
-    `সময়: ${new Date().toLocaleString('bn-BD', { 
-      timeZone: 'Asia/Dhaka',
-      dateStyle: 'full',
-      timeStyle: 'medium'
-    })}\n\n` +
-    `— Automatically sent from your Valentine Message website`
+    `🌹 YOUR KUTTI SAID YES! 💖\n\n` +
+    `${to} accepted your proposal!\n\n` +
+    `She said she will stay with you forever! 💑\n\n` +
+    `From: ${from}\n` +
+    `To: ${to}\n\n` +
+    `Time: ${new Date().toLocaleString()}\n\n` +
+    `Happy Valentine's Day Kutti! 🥀❤️\n` +
+    `I Love You Kutti! 💖\n\n` +
+    `— Sent automatically from your Valentine website`
   );
 
   try {
@@ -734,34 +871,68 @@ document.getElementById('messageForm').addEventListener('submit', async function
     const data = await res.json();
     
     if (data.success) {
-      // Hide form, show success
-      document.getElementById('mainForm').style.display = 'none';
-      const successScreen = document.getElementById('successScreen');
-      successScreen.style.display = 'block';
-      
-      showToast('✅ মেসেজ সফলভাবে পাঠানো হয়েছে!');
-      console.log('Message sent successfully!', data);
-      
-      // Clear form
-      messageInput.value = '';
-      charCount.textContent = '0';
+      status.textContent = '✅ Email sent successfully to ' + from + '!';
+      showToast('💌 Notification sent to your kutta!');
+      console.log('Email sent successfully!', data);
     } else {
-      throw new Error(data.message || 'Unknown error');
+      status.textContent = '❌ Email failed: ' + (data.message || 'Unknown error');
+      showToast('⚠️ Email failed to send');
+      console.error('Email error:', data);
     }
   } catch (error) {
-    showToast('⚠️ মেসেজ পাঠাতে সমস্যা হয়েছে। আবার চেষ্টা করুন।', true);
-    console.error('Send error:', error);
-    
-    sendBtn.disabled = false;
-    sendBtn.classList.remove('loading');
+    status.textContent = '❌ Network error - please check connection';
+    showToast('⚠️ Could not send email');
+    console.error('Fetch error:', error);
   }
-});
+}
 
-// Auto-resize textarea
-messageInput.addEventListener('input', function() {
-  this.style.height = 'auto';
-  this.style.height = Math.min(this.scrollHeight, 300) + 'px';
-});
+// Rose Rain Effect
+function startRoseRain() {
+  const rain   = document.getElementById('roseRain');
+  const petals = ['🌹','♥','💋','🥀','✨','💖','🌸'];
+  const isLow  = navigator.hardwareConcurrency <= 4;
+  const BURST  = isLow ? 28 : 48;
+  const CONT   = isLow ? 45 : 70;
+
+  function drop(delay) {
+    setTimeout(() => {
+      const r           = document.createElement('div');
+      r.className       = 'rose-drop';
+      r.textContent     = petals[Math.random() * petals.length | 0];
+      r.style.left      = (Math.random() * 100) + 'vw';
+      r.style.fontSize  = (.9 + Math.random() * 1.4) + 'rem';
+      r.style.animationDuration = (2 + Math.random() * 3) + 's';
+      rain.appendChild(r);
+      setTimeout(() => r.remove(), 5800);
+    }, delay);
+  }
+
+  for (let i = 0; i < BURST; i++) drop(i * 55);
+
+  let count = 0;
+  const iv = setInterval(() => {
+    drop(0);
+    if (++count >= CONT) clearInterval(iv);
+  }, 200);
+}
+
+// Yes Button Handler
+document.getElementById('yesBtn').addEventListener('click', function sayYes() {
+  noBtn.style.display = 'none';
+  document.getElementById('mainBlock').style.display = 'none';
+  document.querySelector('.seal').style.display = 'none';
+
+  const ys = document.getElementById('yesScreen');
+  ys.style.display = 'block';
+
+  startRoseRain();
+  
+  // Send email after 1 second delay
+  setTimeout(() => {
+    console.log('Attempting to send email...');
+    sendEmail();
+  }, 1000);
+}, { once:true });
 </script>
 </body>
 </html>
