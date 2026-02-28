@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>I’m asking for your forgiveness from the depths of my heart..💔… because the thought of losing you hurts more than my pride ever could.💔</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{width:100%;height:100%;overflow:hidden;background:#000;touch-action:none;user-select:none;font-family:Georgia,serif;}
+
+.page{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .8s ease;}
+.page.hidden{opacity:0;pointer-events:none;}
+
+/* SORRY PAGE */
+#sorryPage{background:radial-gradient(ellipse at 50% 40%,#1a0010 0%,#080008 60%,#000 100%);}
+#sorryPage canvas{position:absolute;inset:0;z-index:0;}
+.sorry-content{position:relative;z-index:2;text-align:center;padding:30px 20px;max-width:480px;}
+.sorry-title{font-size:clamp(13px,3.5vw,18px);color:rgba(255,180,210,.5);letter-spacing:5px;text-transform:uppercase;margin-bottom:18px;animation:fadeUp 1.2s ease forwards;opacity:0;}
+.sorry-main{font-size:clamp(28px,8vw,52px);color:#ffb3d4;font-style:italic;line-height:1.2;text-shadow:0 0 40px #ff006699,0 0 80px #ff003344;animation:fadeUp 1.2s .3s ease forwards;opacity:0;margin-bottom:10px;}
+.sorry-sub{font-size:clamp(14px,3.8vw,20px);color:rgba(255,200,220,.7);font-style:italic;animation:fadeUp 1.2s .6s ease forwards;opacity:0;margin-bottom:32px;line-height:1.6;}
+.sorry-question{font-size:clamp(13px,3.2vw,17px);color:rgba(255,180,200,.85);margin-bottom:28px;animation:fadeUp 1.2s .9s ease forwards;opacity:0;font-style:italic;}
+.btn-row{display:flex;gap:20px;justify-content:center;animation:fadeUp 1.2s 1.1s ease forwards;opacity:0;}
+.btn-yes,.btn-no{padding:13px 38px;border:none;border-radius:50px;cursor:pointer;font-family:Georgia,serif;font-style:italic;font-size:clamp(14px,3.5vw,18px);font-weight:bold;letter-spacing:2px;transition:all .25s ease;}
+.btn-yes{background:linear-gradient(135deg,#ff4488,#cc0055);color:#fff;box-shadow:0 0 25px #ff448866,0 4px 15px rgba(0,0,0,.4);}
+.btn-yes:hover{transform:scale(1.07);box-shadow:0 0 40px #ff4488aa;}
+.btn-no{background:transparent;color:rgba(255,150,180,.7);border:1.5px solid rgba(255,100,150,.35);}
+.btn-no:hover{border-color:rgba(255,100,150,.7);color:#ffb3d4;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);}}
+
+/* SAD MESSAGE */
+#sadMsg{position:fixed;inset:0;z-index:200;background:radial-gradient(ellipse at 50% 40%,#100008 0%,#050005 60%,#000 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .6s ease;text-align:center;padding:30px 20px;}
+#sadMsg.show{opacity:1;pointer-events:all;}
+.sad-text{font-size:clamp(16px,4.5vw,26px);color:#ffb3d4;font-style:italic;line-height:1.7;max-width:420px;margin-bottom:28px;text-shadow:0 0 20px #ff006644;}
+.sad-why{font-size:clamp(12px,3vw,15px);color:rgba(255,160,190,.6);margin-bottom:32px;font-style:italic;max-width:360px;line-height:1.6;}
+.btn-fill-form{padding:13px 36px;border:1.5px solid rgba(255,100,160,.5);border-radius:50px;background:transparent;color:#ffb3d4;font-family:Georgia,serif;font-style:italic;font-size:clamp(13px,3.2vw,16px);cursor:pointer;transition:all .25s ease;letter-spacing:1px;}
+.btn-fill-form:hover{background:rgba(255,50,120,.15);border-color:#ff4488;color:#fff;}
+
+/* FORM PAGE */
+#formPage{background:radial-gradient(ellipse at 50% 40%,#1a0010 0%,#080008 60%,#000 100%);}
+#formPage canvas{position:absolute;inset:0;z-index:0;}
+.form-content{position:relative;z-index:2;text-align:center;padding:30px 24px;max-width:460px;width:100%;}
+.form-title{font-size:clamp(14px,3.8vw,20px);color:#ffb3d4;font-style:italic;letter-spacing:2px;margin-bottom:8px;text-shadow:0 0 25px #ff006688;}
+.form-sub{font-size:clamp(11px,2.8vw,14px);color:rgba(255,160,190,.55);margin-bottom:28px;font-style:italic;}
+.form-field{width:100%;margin-bottom:16px;background:rgba(255,255,255,.05);border:1.5px solid rgba(255,100,160,.3);border-radius:14px;padding:13px 18px;color:#ffe0f0;font-family:Georgia,serif;font-style:italic;font-size:clamp(13px,3.2vw,15px);outline:none;transition:border-color .2s ease;resize:none;}
+.form-field:focus{border-color:rgba(255,100,160,.7);}
+.form-field::placeholder{color:rgba(255,160,190,.4);}
+.btn-send{width:100%;padding:14px;background:linear-gradient(135deg,#ff4488,#cc0055);border:none;border-radius:50px;color:#fff;font-family:Georgia,serif;font-style:italic;font-size:clamp(14px,3.5vw,18px);letter-spacing:2px;cursor:pointer;transition:all .25s ease;box-shadow:0 0 25px #ff448866;}
+.btn-send:hover{transform:scale(1.04);box-shadow:0 0 40px #ff4488aa;}
+
+/* THANK YOU */
+#thankYou{position:fixed;inset:0;z-index:300;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(ellipse at 50% 50%,#1a0015 0%,#000 100%);opacity:0;pointer-events:none;transition:opacity .8s ease;text-align:center;padding:20px;}
+#thankYou.show{opacity:1;pointer-events:all;}
+.ty-title{font-size:clamp(22px,7vw,44px);color:#ffb3d4;font-style:italic;text-shadow:0 0 40px #ff006699;margin-bottom:14px;}
+.ty-sub{font-size:clamp(13px,3.5vw,18px);color:rgba(255,200,220,.75);font-style:italic;margin-bottom:36px;line-height:1.6;max-width:380px;}
+.hearts-burst{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
+.hb{position:absolute;font-size:clamp(16px,4vw,28px);animation:hburst 1.8s ease forwards;}
+@keyframes hburst{0%{opacity:0;transform:translate(0,0) scale(.4);}30%{opacity:1;}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1.3);}}
+.btn-open-universe{padding:15px 44px;background:linear-gradient(135deg,#ff4488,#9900cc);border:none;border-radius:50px;color:#fff;font-family:Georgia,serif;font-style:italic;font-size:clamp(14px,3.8vw,19px);letter-spacing:2px;cursor:pointer;transition:all .3s ease;box-shadow:0 0 35px #ff448899,0 0 70px #9900cc44;animation:pulsebtn 2s ease-in-out infinite;}
+@keyframes pulsebtn{0%,100%{box-shadow:0 0 35px #ff448899,0 0 70px #9900cc44;}50%{box-shadow:0 0 55px #ff4488cc,0 0 100px #9900cc77;}}
+.btn-open-universe:hover{transform:scale(1.06);}
+
+/* UNIVERSE */
+#universe{position:fixed;inset:0;z-index:0;opacity:0;transition:opacity 2s ease;}
+#universe.show{opacity:1;}
+#bg{position:fixed;inset:0;z-index:0;}
+#c3d{position:fixed;inset:0;z-index:1;}
+#uiTitle{position:fixed;top:0;left:0;right:0;z-index:20;pointer-events:none;text-align:center;padding:18px 10px 10px;background:linear-gradient(to bottom,rgba(0,0,0,.92) 55%,transparent);}
+#uiTitle h1{font-family:Georgia,serif;font-style:italic;font-size:clamp(15px,4.5vw,30px);color:#ffb3d4;letter-spacing:3px;text-shadow:0 0 25px #ff006688;animation:tglow 3s ease-in-out infinite alternate;}
+@keyframes tglow{from{color:#ffb3d4;}to{color:#ffe0ee;text-shadow:0 0 40px #ff0088cc;}}
+#msgBox{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);z-index:30;pointer-events:none;background:linear-gradient(135deg,rgba(30,0,25,.92),rgba(60,0,40,.88));border:1.5px solid rgba(255,100,160,.45);border-radius:20px;padding:12px 22px;max-width:85vw;text-align:center;font-family:Georgia,serif;font-style:italic;font-size:clamp(12px,3.2vw,17px);color:#ffe0f0;box-shadow:0 0 25px rgba(255,0,100,.3);opacity:0;transition:opacity .4s ease;}
+#msgBox.show{opacity:1;}
+#emojiHint{position:fixed;bottom:22px;left:0;right:0;z-index:20;text-align:center;pointer-events:none;font-size:clamp(10px,2.5vw,14px);color:rgba(255,180,210,.6);letter-spacing:3px;text-transform:uppercase;}
+
+/* Sorry overlay for noMode */
+#sorryOverlay{position:fixed;inset:0;z-index:25;display:none;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;text-align:center;}
+.so-big{font-family:Georgia,serif;font-style:italic;font-size:clamp(32px,10vw,70px);color:rgba(255,90,130,.5);text-shadow:0 0 40px rgba(255,0,80,.2);letter-spacing:5px;animation:sopulse 3s ease-in-out infinite alternate;}
+.so-small{font-family:Georgia,serif;font-style:italic;font-size:clamp(12px,3vw,17px);color:rgba(255,120,160,.3);margin-top:10px;letter-spacing:2px;animation:sopulse 3s .8s ease-in-out infinite alternate;}
+@keyframes sopulse{from{opacity:.3;transform:scale(.97);}to{opacity:.65;transform:scale(1.03);}}
+
+/* MUSIC BTN */
+#musicBtn{position:fixed;top:14px;right:14px;z-index:50;width:44px;height:44px;border-radius:50%;border:1.5px solid rgba(255,100,160,.45);background:rgba(15,0,12,.85);backdrop-filter:blur(8px);cursor:pointer;display:none;align-items:center;justify-content:center;font-size:19px;transition:all .25s ease;box-shadow:0 0 15px rgba(255,0,100,.2);}
+#musicBtn.on{display:flex;}
+#musicBtn:hover{transform:scale(1.1);border-color:#ff4488;}
+</style>
+</head>
+<body>
+
+<!-- SORRY PAGE -->
+<div id="sorryPage" class="page">
+  <canvas id="sorryStars"></canvas>
+  <div class="sorry-content">
+    <div class="sorry-title">Sudhu tomar jonno... 🥺</div>
+    <div class="sorry-main">Ebar kar moto mam 🥹</div>
+    <div class="sorry-sub">
+      Ami jani onek kosto diyechi tomai<br>
+      Nijer upora onek ragh hocche amar.<br>
+      Kintu tomar bina thaka jay na re... 💔
+    </div>
+    <div class="sorry-question">Ektu ki maf kora jay na? Tumi maf na korle ami thakbo ki kore 🥹 💕</div>
+    <div class="btn-row">
+      <button class="btn-yes" onclick="onYes()">Haa, maf korlam 💖</button>
+      <button class="btn-no"  onclick="onNo()">Na 💔</button>
+    </div>
+  </div>
+</div>
+
+<!-- SAD MESSAGE -->
+<div id="sadMsg">
+  <div class="sad-text">Keno na Sinthia 🥺...? 💔<br>Na Dekhe 😊</div>
+  <div class="sad-why">
+    Tomar jonno ekta puro universe baniyechi ami...😑<br>
+    Shudhu tomar jonno, onek vebe onek kosto kore.<br>
+    Kintu age ektu bolo — keno na bolecho? 🥺<br>
+    Ami jante chai tomar mon ki bole.
+  </div>
+  <button class="btn-fill-form" onclick="goToForm()">Bolo keno → Ektu lekho amar jonno 💕</button>
+</div>
+
+<!-- FORM PAGE -->
+<div id="formPage" class="page hidden">
+  <canvas id="formStars"></canvas>
+  <div class="form-content">
+    <div class="form-title">Sotti kore bolo Sinthia... ami ki onek kharap? 🥺</div>
+    <div class="form-sub">Jani kharap korechi... taও ektu maf kore dao na pliz.</div>
+    <form id="loveForm" onsubmit="submitForm(event)">
+      <input type="hidden" name="access_key" value="d50a832f-6f41-42c9-bed5-e8d2b8e02b38">
+      <input type="hidden" name="subject"    value="Sinthia said NO 💔 — Her reason">
+      <input type="hidden" name="name"       value="Sinthia">
+      <textarea class="form-field" name="message" rows="5" placeholder="Mon khule bolo... ki kosto diyechi tomar? 🥺" required></textarea>
+      <button type="submit" class="btn-send">Saidur er kache pathiye dao 💕</button>
+    </form>
+  </div>
+</div>
+
+<!-- THANK YOU -->
+<div id="thankYou">
+  <div class="hearts-burst" id="heartsBurst"></div>
+  <div class="ty-title" id="tyTitle">Onek Onek Dhonnobad Sinthia 🥹</div>
+  <div class="ty-sub"  id="tySub"><br>Ebar dekho — tomar jonno ekta Sundor Jinis banayci . ✨</div>
+  <button class="btn-open-universe" onclick="openUniverse()">Open 😊</button>
+</div>
+
+<!-- UNIVERSE -->
+<div id="universe">
+  <canvas id="bg"></canvas>
+  <canvas id="c3d"></canvas>
+  <div id="uiTitle"><h1></h1></div>
+  <div id="sorryOverlay">
+    <div class="so-big">Sorry 🥺</div>
+    <div class="so-small">Pliz maf kore dao... tomar bina thaka jay na 💔</div>
+  </div>
+  <div id="msgBox"></div>
+  <div id="emojiHint">Shudhu tomar jonno banano 😊</div>
+</div>
+
+<!-- MUSIC -->
+<button id="musicBtn" onclick="toggleMusic()">🎵</button>
+<audio id="bgMusic" loop preload="auto">
+  <source src="https://www.dropbox.com/scl/fi/1ilrrd37wp6m0udk75se8/Arijit-Singh-_-_-Bangla-Song-202-M4A_128K.m4a?rlkey=ivu4g0uu6nqlqn0vbwyqdhs0o&st=g1clg2w3&raw=1" type="audio/mp4">
+</audio>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+// ── STARS ──
+function initStars(id){
+  const c=document.getElementById(id);if(!c)return;
+  const ctx=c.getContext('2d');let W,H;
+  const stars=Array.from({length:180},()=>({x:Math.random(),y:Math.random(),r:Math.random()*1.2+.2,a:Math.random(),da:(Math.random()*.008+.002)*(Math.random()>.5?1:-1),pk:Math.random()>.85}));
+  function resize(){W=c.width=c.offsetWidth||innerWidth;H=c.height=c.offsetHeight||innerHeight;}
+  resize();window.addEventListener('resize',resize);
+  (function draw(){ctx.clearRect(0,0,W,H);stars.forEach(s=>{s.a+=s.da;if(s.a>1||s.a<.05)s.da*=-1;ctx.beginPath();ctx.arc(s.x*W,s.y*H,s.r,0,Math.PI*2);ctx.fillStyle=s.pk?`rgba(255,170,210,${s.a})`:`rgba(255,255,255,${s.a*.7})`;ctx.fill();});requestAnimationFrame(draw);})();
+}
+initStars('sorryStars');
+initStars('formStars');
+
+// ── MUSIC (HTML5 Audio) ──
+const bgMusic = document.getElementById('bgMusic');
+let musicMuted = false;
+
+function startMusic(){
+  document.getElementById('musicBtn').classList.add('on');
+  bgMusic.volume = 0.75;
+  bgMusic.play().catch(()=>{
+    // If autoplay blocked, show button to let user start
+    document.getElementById('musicBtn').textContent = '▶️';
+  });
+}
+function toggleMusic(){
+  const btn = document.getElementById('musicBtn');
+  musicMuted = !musicMuted;
+  bgMusic.muted = musicMuted;
+  btn.textContent = musicMuted ? '🔇' : '🎵';
+  btn.style.opacity = musicMuted ? '.5' : '1';
+  // If paused (autoplay was blocked), play on first tap
+  if(bgMusic.paused){ bgMusic.play(); btn.textContent='🎵'; musicMuted=false; bgMusic.muted=false; }
+}
+
+// ── FLOW ──
+let noMode=false;
+
+function onYes(){
+  fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify({access_key:'d50a832f-6f41-42c9-bed5-e8d2b8e02b38',subject:'Sinthia maf korlo 💖',name:'Sinthia',message:'Sinthia maf kore diyeche! Onek valobasha 💕'})
+  }).catch(()=>{});
+  document.getElementById('sorryPage').classList.add('hidden');
+  noMode=false;
+  showThankYou(true);
+}
+function onNo(){
+  document.getElementById('sadMsg').classList.add('show');
+}
+function goToForm(){
+  document.getElementById('sadMsg').classList.remove('show');
+  document.getElementById('sorryPage').classList.add('hidden');
+  document.getElementById('formPage').classList.remove('hidden');
+}
+async function submitForm(e){
+  e.preventDefault();
+  const data={};new FormData(document.getElementById('loveForm')).forEach((v,k)=>data[k]=v);
+  try{await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)});}catch(_){}
+  noMode=true;
+  document.getElementById('formPage').classList.add('hidden');
+  showThankYou(false);
+}
+function showThankYou(isYes){
+  if(!isYes){document.getElementById('tyTitle').textContent='Thank You for Sharing 💌';document.getElementById('tySub').textContent='He will hear you.\nNow — the universe opens for you. ✨';}
+  document.getElementById('thankYou').classList.add('show');
+  spawnHearts();
+}
+function spawnHearts(){
+  const ct=document.getElementById('heartsBurst'),em=['💖','💕','✨','🌸','💫','❤️','💗','?😊'];
+  for(let i=0;i<22;i++){setTimeout(()=>{const h=document.createElement('div');h.className='hb';h.textContent=em[~~(Math.random()*em.length)];const a=Math.random()*Math.PI*2,d=120+Math.random()*200;h.style.cssText=`left:${40+Math.random()*20}%;top:${35+Math.random()*20}%;--dx:${Math.cos(a)*d}px;--dy:${Math.sin(a)*d}px;animation-delay:${Math.random()*.5}s;`;ct.appendChild(h);setTimeout(()=>h.remove(),2500);},i*80);}
+  setInterval(()=>{const h=document.createElement('div');h.className='hb';h.textContent=em[~~(Math.random()*em.length)];const a=Math.random()*Math.PI*2,d=100+Math.random()*180;h.style.cssText=`left:${35+Math.random()*30}%;top:${30+Math.random()*30}%;--dx:${Math.cos(a)*d}px;--dy:${Math.sin(a)*d}px;`;document.getElementById('heartsBurst').appendChild(h);setTimeout(()=>h.remove(),2000);},600);
+}
+function openUniverse(){
+  document.getElementById('thankYou').classList.remove('show');
+  if(noMode) document.getElementById('sorryOverlay').style.display='flex';
+  document.getElementById('universe').classList.add('show');
+  startMusic();
+  initUniverse();
+}
+
+// ── 3D UNIVERSE ──
+const IMGS=[
+  'https://i.ibb.co.com/1f4pwwTK/cdc536a01c6f3d5e803d8ab0d067f163.jpg',
+  'https://i.ibb.co.com/HL6r6wn9/photostudio-1771045387391-1.jpg',
+  'https://i.ibb.co.com/tFs2Lxb/7cae76456a764553a348295e391b2ce8.jpg',
+  'https://i.ibb.co.com/Ls0vMF2/ba5aa0690184f4c8195233d35e554b3a.jpg',
+  'https://i.ibb.co.com/bgwfbMyC/41bc97ea6bf1c49938375c71fb92abed.jpg',
+  'https://i.ibb.co.com/HL6r6wn9/photostudio-1771045387391-1.jpg',
+  'https://i.ibb.co.com/fVQjJ9FK/5569675680827a1ebd7074699ca52006.jpg',
+  'https://i.ibb.co.com/RkT1QNqs/56b2d5b6d805bb285e6926c848ee4650.jpg',
+  'https://i.ibb.co.com/ZpwWkxWK/2e3fb437d7f49f85319d3b2680debff6.gif',
+];
+const MSGS_U=[
+  "💕 Toke onek onek valobasi re, ei jonnoy jamela kori kutta 🥺",
+  "🌙 Raat e chand dekhi ar tomar kotha mone pore~ 💫",
+  "🐻 Tumi chara amar boka sonar  keo  nai re... onek beshi valobasi tomake 🥺",
+  "💋 Tomar jonno shob bhalobasha pathiye dilam, shudhu tomar jonno 💋",
+  "😊 Tumi hasle amar puro din ta sundor hoye jay, sotti bolchi 😊",
+  "❤️ Tomar karone amar mon ta vore thake shob somo  ❤️",
+  "✨ Valobasha mane tumi... ✨",
+  "🎀 Tomar kotha vable monta neche othe, bujhli? 🎀",
+  "🌸 Tui amar jibone shobcheye shundor jinish re Sinthia 🌸",
+];
+
+let universeInited=false;
+function initUniverse(){
+  if(universeInited)return;universeInited=true;
+
+  // BG Stars
+  const bgC=document.getElementById('bg'),bgX=bgC.getContext('2d');let BW,BH;
+  const rb=()=>{BW=bgC.width=innerWidth;BH=bgC.height=innerHeight;};rb();window.addEventListener('resize',rb);
+  const ST=Array.from({length:260},()=>({x:Math.random(),y:Math.random(),r:Math.random()*1.4+.2,a:Math.random(),da:(Math.random()*.01+.003)*(Math.random()>.5?1:-1),pk:Math.random()>.82}));
+  (function drawBg(){
+    bgX.fillStyle='#010010';bgX.fillRect(0,0,BW,BH);
+    [{x:.18,y:.28,r:.5,c:'rgba(100,0,80,.13)'},{x:.82,y:.72,r:.42,c:'rgba(15,0,70,.16)'}].forEach(n=>{const g=bgX.createRadialGradient(n.x*BW,n.y*BH,0,n.x*BW,n.y*BH,n.r*BW);g.addColorStop(0,n.c);g.addColorStop(1,'transparent');bgX.fillStyle=g;bgX.fillRect(0,0,BW,BH);});
+    ST.forEach(s=>{s.a+=s.da;if(s.a>1||s.a<.05)s.da*=-1;bgX.beginPath();bgX.arc(s.x*BW,s.y*BH,s.r,0,Math.PI*2);bgX.fillStyle=s.pk?`rgba(255,170,210,${s.a})`:`rgba(255,255,255,${s.a})`;bgX.fill();});
+    requestAnimationFrame(drawBg);
+  })();
+
+  const renderer=new THREE.WebGLRenderer({canvas:document.getElementById('c3d'),alpha:true,antialias:true});
+  renderer.setSize(innerWidth,innerHeight);renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.setClearColor(0,0);
+  const scene=new THREE.Scene();
+  const camera=new THREE.PerspectiveCamera(52,innerWidth/innerHeight,.1,100);
+  camera.position.set(0,1.6,5.8);camera.lookAt(0,0,0);
+  window.addEventListener('resize',()=>{renderer.setSize(innerWidth,innerHeight);camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();});
+  scene.add(new THREE.AmbientLight(0xffffff,.5));
+  const sl=new THREE.PointLight(0xffee58,3,20);scene.add(sl);
+  const sunM=new THREE.Mesh(new THREE.SphereGeometry(.5,64,64),new THREE.MeshStandardMaterial({color:0xffdd00,emissive:0xffaa00,emissiveIntensity:1.3,roughness:.3}));
+  scene.add(sunM);
+
+  function mkGlow(sz,col){
+    const cv=document.createElement('canvas');cv.width=cv.height=256;const cx=cv.getContext('2d');
+    const g=cx.createRadialGradient(128,128,0,128,128,128);
+    g.addColorStop(0,`rgba(${col},1)`);g.addColorStop(.4,`rgba(${col},.35)`);g.addColorStop(1,'rgba(0,0,0,0)');
+    cx.fillStyle=g;cx.fillRect(0,0,256,256);
+    const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:new THREE.CanvasTexture(cv),transparent:true,blending:THREE.AdditiveBlending,depthWrite:false}));
+    sp.scale.set(sz,sz,1);return sp;
+  }
+  const sg1=mkGlow(3,'255,220,50'),sg2=mkGlow(5.2,'255,140,20');
+  scene.add(sg1);scene.add(sg2);
+
+  function mkRing(r,col){
+    const pts=[];for(let i=0;i<=128;i++){const a=i/128*Math.PI*2;pts.push(new THREE.Vector3(Math.cos(a)*r,0,Math.sin(a)*r));}
+    return new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),new THREE.LineBasicMaterial({color:col,transparent:true,opacity:.18}));
+  }
+  const pivot=new THREE.Group();scene.add(pivot);
+  pivot.add(sunM,sg1,sg2);
+  const rg=new THREE.Group();
+  [{r:1.4,c:0xff4488},{r:2.4,c:0x9944ff},{r:3.4,c:0x4488ff},{r:4.3,c:0xff8844}].forEach(o=>rg.add(mkRing(o.r,o.c)));
+  pivot.add(rg);
+
+  const LAYOUT=[
+    {imgIdx:0,msgIdx:0,orbitR:1.4,tiltX:.28, tiltZ:.08, startA:0},
+    {imgIdx:1,msgIdx:1,orbitR:1.4,tiltX:.28, tiltZ:.08, startA:Math.PI},
+    {imgIdx:2,msgIdx:2,orbitR:2.4,tiltX:-.48,tiltZ:.18, startA:.5},
+    {imgIdx:8,msgIdx:8,orbitR:2.4,tiltX:-.48,tiltZ:.18, startA:.5+Math.PI},
+    {imgIdx:3,msgIdx:3,orbitR:2.4,tiltX:-.48,tiltZ:.18, startA:.5+Math.PI*2/3},
+    {imgIdx:4,msgIdx:4,orbitR:3.4,tiltX:.55, tiltZ:-.12,startA:1.0},
+    {imgIdx:5,msgIdx:5,orbitR:3.4,tiltX:.55, tiltZ:-.12,startA:1+Math.PI*2/3},
+    {imgIdx:6,msgIdx:6,orbitR:3.4,tiltX:.55, tiltZ:-.12,startA:1+Math.PI*4/3},
+    {imgIdx:7,msgIdx:7,orbitR:4.3,tiltX:-.2, tiltZ:.35, startA:.2},
+  ];
+  const OSPD={1.4:.42,2.4:.24,3.4:.15,4.3:.09};
+  const OG={};
+  LAYOUT.forEach(it=>{if(!OG[it.orbitR]){const g=new THREE.Group();g.rotation.x=it.tiltX;g.rotation.z=it.tiltZ;OG[it.orbitR]=g;pivot.add(g);}});
+
+  const spriteList=[];
+
+  // Make black "Sorry" circle for noMode
+  function blackSprite(orbitR){
+    const sz=256,cv=document.createElement('canvas');cv.width=cv.height=sz;const cx=cv.getContext('2d');
+    cx.beginPath();cx.arc(sz/2,sz/2,sz/2-1,0,Math.PI*2);
+    const bg=cx.createRadialGradient(sz/2,sz/2,0,sz/2,sz/2,sz/2);bg.addColorStop(0,'rgba(5,0,4,1)');bg.addColorStop(1,'rgba(0,0,0,1)');
+    cx.fillStyle=bg;cx.fill();
+    cx.beginPath();cx.arc(sz/2,sz/2,sz/2-4,0,Math.PI*2);cx.strokeStyle='rgba(150,0,45,.35)';cx.lineWidth=4;cx.stroke();
+    cx.font=`italic bold ${sz*.19}px Georgia,serif`;cx.textAlign='center';cx.textBaseline='middle';
+    cx.fillStyle='rgba(255,65,105,.55)';cx.shadowColor='rgba(255,0,70,.35)';cx.shadowBlur=10;
+    cx.fillText('Sorry',sz/2,sz/2);cx.shadowBlur=0;
+    const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:new THREE.CanvasTexture(cv),transparent:true,depthWrite:false}));
+    const s=orbitR*.37;sp.scale.set(s,s,1);return sp;
+  }
+
+  // Make photo circle
+  function photoSprite(url,orbitR){
+    return new Promise(res=>{
+      const img=new Image();img.crossOrigin='anonymous';
+      img.onload=()=>{
+        const sz=256,cv=document.createElement('canvas');cv.width=cv.height=sz;const cx=cv.getContext('2d');
+        cx.beginPath();cx.arc(sz/2,sz/2,sz/2-1,0,Math.PI*2);
+        const bg=cx.createRadialGradient(sz/2,sz/2,0,sz/2,sz/2,sz/2);bg.addColorStop(0,'rgba(12,0,10,.9)');bg.addColorStop(.75,'rgba(25,0,18,.88)');bg.addColorStop(1,'rgba(50,0,35,.5)');
+        cx.fillStyle=bg;cx.fill();
+        cx.save();cx.beginPath();cx.arc(sz/2,sz/2,sz/2-5,0,Math.PI*2);cx.clip();
+        const sc=Math.min((sz-10)/img.width,(sz-10)/img.height);
+        cx.drawImage(img,(sz-img.width*sc)/2,(sz-img.height*sc)/2,img.width*sc,img.height*sc);
+        cx.restore();
+        cx.beginPath();cx.arc(sz/2,sz/2,sz/2-3,0,Math.PI*2);cx.strokeStyle='rgba(255,100,160,.6)';cx.lineWidth=5;cx.stroke();
+        const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:new THREE.CanvasTexture(cv),transparent:true,depthWrite:false}));
+        const s=orbitR*.37;sp.scale.set(s,s,1);res(sp);
+      };
+      img.onerror=()=>{
+        // fallback heart
+        const sz=256,cv=document.createElement('canvas');cv.width=cv.height=sz;const cx=cv.getContext('2d');
+        const bg=cx.createRadialGradient(sz/2,sz/2,0,sz/2,sz/2,sz/2);bg.addColorStop(0,'rgba(18,0,14,.95)');bg.addColorStop(1,'rgba(50,0,35,.4)');
+        cx.beginPath();cx.arc(sz/2,sz/2,sz/2-1,0,Math.PI*2);cx.fillStyle=bg;cx.fill();
+        cx.beginPath();cx.arc(sz/2,sz/2,sz/2-4,0,Math.PI*2);cx.strokeStyle='rgba(255,100,180,.6)';cx.lineWidth=5;cx.stroke();
+        cx.font=`${sz*.44}px serif`;cx.textAlign='center';cx.textBaseline='middle';cx.fillText('💖',sz/2,sz/2+4);
+        const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:new THREE.CanvasTexture(cv),transparent:true,depthWrite:false}));
+        const s=orbitR*.37;sp.scale.set(s,s,1);res(sp);
+      };
+      img.src=url;
+    });
+  }
+
+  async function buildAll(){
+    for(const it of LAYOUT){
+      let sp;
+      if(noMode){
+        sp=blackSprite(it.orbitR);
+      } else {
+        sp=await photoSprite(IMGS[it.imgIdx],it.orbitR);
+      }
+      sp.userData={angle:it.startA,orbitR:it.orbitR,msgIdx:it.msgIdx,baseScale:it.orbitR*.37,bounce:0};
+      OG[it.orbitR].add(sp);spriteList.push(sp);
+    }
+  }
+  buildAll();
+
+  // Controls
+  let isDrag=false,px=0,py=0,velX=0,velY=0,rotY=.3,rotXr=.2,zoom=1,txS=0,tyS=0;
+  const cvs=document.getElementById('c3d');
+  cvs.addEventListener('mousedown',e=>{isDrag=true;px=e.clientX;py=e.clientY;velX=velY=0;});
+  window.addEventListener('mousemove',e=>{if(!isDrag)return;const dx=e.clientX-px,dy=e.clientY-py;velX=dx;velY=dy;rotY+=dx*.005;rotXr=Math.max(-1.2,Math.min(1.2,rotXr+dy*.004));px=e.clientX;py=e.clientY;});
+  window.addEventListener('mouseup',()=>isDrag=false);
+  let t1n=null,t2n=null,pdn=0;
+  cvs.addEventListener('touchstart',e=>{if(e.touches.length===1){isDrag=true;px=e.touches[0].clientX;py=e.touches[0].clientY;txS=px;tyS=py;velX=velY=0;}if(e.touches.length===2){t1n={x:e.touches[0].clientX,y:e.touches[0].clientY};t2n={x:e.touches[1].clientX,y:e.touches[1].clientY};pdn=Math.hypot(t2n.x-t1n.x,t2n.y-t1n.y);}},{passive:true});
+  cvs.addEventListener('touchmove',e=>{e.preventDefault();if(e.touches.length===1&&isDrag){const dx=e.touches[0].clientX-px,dy=e.touches[0].clientY-py;velX=dx;velY=dy;rotY+=dx*.005;rotXr=Math.max(-1.2,Math.min(1.2,rotXr+dy*.004));px=e.touches[0].clientX;py=e.touches[0].clientY;}if(e.touches.length===2&&t1n){const nt1={x:e.touches[0].clientX,y:e.touches[0].clientY},nt2={x:e.touches[1].clientX,y:e.touches[1].clientY},nd=Math.hypot(nt2.x-nt1.x,nt2.y-nt1.y);zoom=Math.max(.35,Math.min(3,zoom*nd/pdn));camera.position.z=5.8/zoom;camera.position.y=1.6/zoom;pdn=nd;t1n=nt1;t2n=nt2;}},{passive:false});
+  cvs.addEventListener('touchend',()=>{isDrag=false;t1n=null;t2n=null;});
+  window.addEventListener('wheel',e=>{zoom=Math.max(.35,Math.min(3,zoom-e.deltaY*.001));camera.position.z=5.8/zoom;camera.position.y=1.6/zoom;});
+
+  // Tap
+  const ray=new THREE.Raycaster(),mouse=new THREE.Vector2();let msgTmr=null;
+  const msgBox=document.getElementById('msgBox');
+  function showMsg(i){clearTimeout(msgTmr);msgBox.textContent=MSGS_U[i];msgBox.classList.add('show');msgTmr=setTimeout(()=>msgBox.classList.remove('show'),4500);}
+  function handleTap(cx,cy){mouse.x=(cx/innerWidth)*2-1;mouse.y=-(cy/innerHeight)*2+1;ray.setFromCamera(mouse,camera);const hits=ray.intersectObjects(spriteList);if(hits.length){const sp=hits[0].object;showMsg(sp.userData.msgIdx);sp.userData.bounce=1;}}
+  cvs.addEventListener('click',e=>handleTap(e.clientX,e.clientY));
+  cvs.addEventListener('touchend',e=>{if(e.changedTouches.length===1){const dx=Math.abs(e.changedTouches[0].clientX-txS),dy=Math.abs(e.changedTouches[0].clientY-tyS);if(dx<14&&dy<14)handleTap(e.changedTouches[0].clientX,e.changedTouches[0].clientY);}});
+
+  // Animate
+  let clk=0;
+  (function anim(){requestAnimationFrame(anim);clk+=.016;
+    if(!isDrag){rotY+=velX*.002;rotXr+=velY*.002;velX*=.92;velY*=.92;rotY+=.0018;}
+    pivot.rotation.y=rotY;pivot.rotation.x=rotXr;
+    const p=1+Math.sin(clk*2)*.04;
+    sunM.scale.set(p,p,p);sg1.scale.set(3*p,3*p,1);sg2.scale.set(5.2*p,5.2*p,1);sl.intensity=2.5+Math.sin(clk*2)*.5;
+    spriteList.forEach(sp=>{
+      sp.userData.angle+=OSPD[sp.userData.orbitR]*.016;
+      const a=sp.userData.angle,r=sp.userData.orbitR;
+      sp.position.set(Math.cos(a)*r,0,Math.sin(a)*r);
+      if(sp.userData.bounce>0){sp.userData.bounce-=.04;const b=1+Math.sin(sp.userData.bounce*Math.PI)*.3;sp.scale.set(sp.userData.baseScale*b,sp.userData.baseScale*b,1);}
+      else sp.scale.set(sp.userData.baseScale,sp.userData.baseScale,1);
+    });
+    renderer.render(scene,camera);
+  })();
+}
+</script>
+</body>
+</html>
